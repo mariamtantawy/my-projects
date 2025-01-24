@@ -1,0 +1,128 @@
+# menu 1
+def binary_subtraction(bin1, bin2):
+    max_len = max(len(bin1), len(bin2))
+    bin1 = bin1.zfill(max_len)
+    bin2 = bin2.zfill(max_len)
+
+    result = ''
+    borrow = 0
+    for i in range(max_len - 1, -1, -1):
+        bit1 = int(bin1[i])
+        bit2 = int(bin2[i])
+        bit2 += borrow
+        diff = bit1 - bit2
+        if diff < 0:
+            diff += 2
+            borrow = 1
+        else:
+            borrow = 0
+        result = str(diff) + result
+
+    result = result.lstrip('0')
+    if result == '':
+        result = '0'
+
+    return result
+
+while True:
+    print("binary calculator")
+    print("A)Insert a number")
+    print("B)Exit program")
+    choice1 = input()
+    if(choice1 == 'A'):
+      num = (input('please insert a number:'" "))
+      is_not_binary = True
+      while is_not_binary:
+       is_not_binary = False
+       for digit in num:
+        if(digit != "1" and digit != "0"):
+          is_not_binary = True
+          print('please insert a valid binary number')
+          num = input()
+    elif(choice1 == 'B'):
+      print("exiting program")
+
+      break
+    else:
+     print('please select a valid choice'" ")
+     continue
+#menu 2
+    while(is_not_binary == False):
+     print("please select the operation")
+     print("A) Compute one's complement")
+     print("B) Compute two's complement")
+     print("C) addition")
+     print("D) subtraction")
+     choice2 = input()
+     if(choice2 == 'A'):
+      if choice2.lower()=="a":
+       first_comp=""
+       for bit in num:
+        if bit=="1":
+            first_comp+="0"
+        elif bit=="0":
+            first_comp+="1"
+       print("The first compliment of",num,"is",first_comp)
+       break
+     elif(choice2 == 'B'):
+      if choice2.lower()=="b":
+       first_comp=""
+       for bit in num:
+        if bit=="1":
+            first_comp+="0"
+        elif bit=="0":
+            first_comp+="1"
+        second_comp=int(first_comp)+1
+       print("The second compliment of",num,"is",second_comp)
+       break
+     elif(choice2 == 'C'):
+      num = int(num)
+      num2 = input("please insert a second number:")
+      is_not_binary = True
+      while is_not_binary:
+       is_not_binary = False
+       for digit in num2:
+        if(digit != "1" and digit != "0"):
+          is_not_binary = True
+          print('please insert a valid binary number')
+          num2 = input()
+      carry = 0
+      sum = []
+      num = int(num)
+      num2 = int(num2)
+      while(num > 0 or num2 >0):
+       last_digit = num % 10
+       last_digit2 = num2 % 10
+       if(last_digit + last_digit2 + carry == 2):
+        sum_digit = 0
+        carry = 1
+       elif(last_digit + last_digit2 + carry == 3):
+        sum_digit =1
+        carry = 1
+       else:
+        sum_digit = last_digit + last_digit2 + carry
+        carry = 0
+       sum.append(sum_digit)
+       num = num// 10
+       num2 = num2// 10
+      sum.reverse()
+      print(carry,end="")
+      for i in sum:
+       print(i,end='')
+      print()
+      break
+     elif(choice2 == 'D'):
+      num2 = input("please insert a second number:")
+      is_not_binary = True
+      while is_not_binary:
+       is_not_binary = False
+       for digit in num2:
+        if(digit != "1" and digit != "0"):
+          is_not_binary = True
+          print('please insert a valid binary number')
+          num2 = input()
+      result = binary_subtraction(num, num2)
+      print("The result= ", result)
+      break
+     else:
+      print("please insert a valid choice")
