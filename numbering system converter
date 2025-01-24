@@ -1,0 +1,316 @@
+# menu 1
+res=int()
+while True:
+    print("Numbering system converter")
+    print("select A or B")
+    print("A)Insert a number")
+    print("B)Exit program")
+    input1 = str(input())
+    while input1 != 'B':
+       if input1 == 'A':
+        num1 = input("Please insert a number")
+        break
+       else:
+        print("please select a valid choice")
+        input1 = str(input())
+
+    if input1 == 'B':
+        print("exiting program")
+        print("thank you for using our program")
+        break
+# # menu 2
+    print("Please select the base you want to convert the number from")
+    print("A) Decimal")
+    print("B) Binary")
+    print("C) octal")
+    print("D) hexadecimal")
+    while True:
+       menu2 = str(input())
+       if menu2 != 'A' and menu2 != 'B' and menu2 != 'C' and menu2 != 'D':
+        print("Please select a valid choice")
+       else:
+
+        break
+
+# menu3
+    print(" Please select the base you want to convert a number to")
+    print("A) Decimal")
+    print("B) Binary")
+    print("C) octal")
+    print("D) hexadecimal")
+    while True:
+        menu3 = str(input())
+        if menu3 != 'A' and menu3 != 'B' and menu3 != 'C' and menu3 != 'D':
+            print("Please select a valid choice")
+        else:
+            if menu2 == 'B' and menu3 == 'A':
+                print("converting from binary to decimal ")
+                dec_equi = int(num1, 2)
+                print("The conversion of", num1, "to a decimal number is", dec_equi)
+            elif menu2 == 'C' and menu3 == 'A':
+                print("converting from octal to decimal ")
+                i = int(0)
+                dec = int(0)
+                rem = int()
+                num1=int(num1)
+                while (num1 > 0):
+                    rem = num1 % 10
+                    dec = dec + (rem * (8 ** i))
+                    i = i + 1
+                    num1 = num1 // 10
+                print("RESULT = ", dec)
+
+            elif menu2 == 'D' and menu3 == 'A':
+                print("converting from hexadecimal to decimal ")
+                dec_num = 0
+                i = 0
+                hexa_num_len = len(num1) - 1
+                while (hexa_num_len >= 0):
+                    rem = num1[hexa_num_len]
+                    if (rem >= '0' and rem <= '9'):
+                        rem = int(rem)
+                    elif (rem == 'A'):
+                        rem = 10
+                    elif (rem == 'B'):
+                        rem = 11
+                    elif (rem == 'C'):
+                        rem = 12
+                    elif (rem == 'D'):
+                        rem = 13
+                    elif (rem == 'E'):
+                        rem = 14
+                    elif (rem == 'F'):
+                        rem = 15
+                    dec_num = dec_num + rem * (16 ** i)
+                    hexa_num_len = hexa_num_len - 1
+                    i += 1
+                print("The result = ",dec_num)
+
+            elif menu2 == 'A' and menu3 == 'B':
+                print("converting from decimal to binary  ")
+                num1= int(num1)
+                result = []
+                while ( num1> 0 ):
+                    if ( num1% 2 == 1 ):
+                        num1 = (num1 / 2) - 0.5
+                        rem = 1
+                    else:
+                        num1 = num1 / 2
+                        rem = 0
+                    result.append(rem)
+                result.reverse()
+                for digit in result:
+                    print(digit,end='')
+            elif menu2 == 'C' and menu3 == 'B':
+                print("converting from octal to binary  ")
+                i = int()
+                num1=int(num1)
+                result = int()
+                Result = int()
+                temp = num1
+                while (num1 > 0):
+                    rem = num1 % 10
+                    i = 0
+                    while (i < 3 or rem > 0):
+                        if rem % 2 == 0:
+                            result = result * 10 + 0
+                        else:
+                            result = result * 10 + 1
+                        rem = rem // 2
+                        i = i + 1
+                    num1 = num1 // 10
+                while (result > 0):
+                    rem1 = result % 10
+                    Result = (Result * 10) + rem1
+                    result = result // 10
+                if temp % 2 == 0:
+                    Result = Result * 10
+                print("RESULT= ",Result)
+            elif menu2 == 'D' and menu3 == 'B':
+                print("converting from hexadecimal to binary  ")
+                i=0
+                num1=str(num1)
+                digit=len(num1)
+                while i < digit:
+                    res = num1[i]
+                    if res == 'F':
+                        print("1111", end='')
+                    elif res== 'A':
+                        print("1010", end='')
+                    elif res == 'B':
+                        print("1100", end='')
+                    elif res == 'C':
+                        print("1011", end='')
+                    elif res == 'D':
+                        print("1101", end='')
+                    elif res == 'E':
+                        print("1110", end='')
+                    elif res == '1':
+                        print("0001", end='')
+                    elif res == '2':
+                        print("0010", end='')
+                    elif res == '3':
+                        print("0011", end='')
+                    elif res == '4':
+                        print("0100", end='')
+                    elif res == '5':
+                        print("0101", end='')
+                    elif res == '6':
+                        print("0110", end='')
+                    elif res == '7':
+                        print("0111", end='')
+                    elif res == '8':
+                        print("1000", end='')
+                    elif res == '9':
+                        print("1001", end='')
+                    i = i + 1
+            elif menu2 == 'A' and menu3 == 'C':
+                print("converting from decimal to octal ")
+                num1= int(num1)
+                result = []
+                while( num1 > 0):
+                    rem = num1 % 8
+                    num1 = int(num1 / 8)
+                    result.append(rem)
+                result.reverse()
+                for digit in result:
+                    print(digit,end='')
+                print("\n")
+
+            elif menu2 == 'B' and menu3 == 'C':
+                print("converting from binary to octal ")
+
+                while len(num1) % 3 != 0:
+                  num1 = "0" + num1
+                  oct_equiv=""
+                for i in range(0, len(num1), 3):
+                    group = num1[i:i+3]
+                    dec_equi = int(group, 2)
+                    octal_digit = ""
+                    while dec_equi > 0:
+                        octal_digit += str(dec_equi % 8)
+                        dec_equi = dec_equi//8
+                        oct_equiv += octal_digit
+                print("The conversion of", num1, "to an octal number is", oct_equiv)
+
+            elif menu2 == 'D' and menu3 == 'C':
+                print("converting from hexadecimal to octal ")
+                oct_equiv = ""
+                bin_equiv = ""
+                temp=num1
+                for digit in num1:
+                    bin_equiv += format(int(digit, 16), '04b')
+                while len(bin_equiv) % 3 != 0:
+                    bin_equiv = "0" + bin_equiv
+                for i in range(0, len(bin_equiv), 3):
+                    group = bin_equiv[i:i + 3]
+                    oct_digit = int(group, 2)
+                    oct_equiv += str(oct_digit)
+
+                print("The conversion of", temp, "to an octal number is",oct_equiv)
+
+            elif menu2 == 'A' and menu3 == 'D':
+                print("converting from decimal to hexadecimal ")
+                num1= int(num1)
+                result = []
+                print("result =",end='')
+                while( num1 > 0):
+                    rem = num1 % 16
+                    num1 = int(num1 / 16)
+                    if(rem == 10):
+                        rem = "A"
+                    elif(rem == 11):
+                        rem = "B"
+                    elif(rem == 12):
+                        rem = "C"
+                    elif(rem == 13):\
+                        rem = "D"
+                    elif(rem == 14):(
+                        rem) = "E"
+                    elif(rem == 15):
+                        rem = "F"
+                    result.append(rem)
+                result.reverse()
+                for digit in result:
+                    print(digit,end=" ")
+            elif menu2 == 'B' and menu3 == 'D':
+                print("converting from binary to hexadecimal ")
+                temp=num1
+                while len(num1) % 4 != 0:
+                    num1= "0" + num1
+                hex_equi = ""
+
+                for i in range(0, len(num1), 4):
+                    group = num1[i:i + 4]
+                    dec_equi = int(group, 2)
+                    hex_digits = ""
+
+                    while dec_equi > 0:
+                        rem = dec_equi % 16
+                        if rem < 10:
+                            hex_digits = str(rem) + hex_digits
+                        else:
+                            if rem == 10:
+                                hex_digits = "A" + hex_digits
+                            elif rem == 11:
+                                hex_digits = "B" + hex_digits
+                            elif rem == 12:
+                                hex_digits = "C" + hex_digits
+                            elif rem == 13:
+                                hex_digits = "D" + hex_digits
+                            elif rem == 14:
+                                hex_digits = "E" + hex_digits
+                            elif rem == 15:
+                                hex_digits = "F" + hex_digits
+                        dec_equi = dec_equi // 16
+                    hex_equi += hex_digits
+
+                print("The conversion of", temp, "to a hexadecimal number is",hex_equi)
+
+
+            elif menu2 == 'C' and menu3 == 'D':
+                print("converting from octal to hexadecimal ")
+                rev = int()
+                res = int()
+                res2 = 0
+                num1 = int(num1)
+                temp=num1
+                reversed_result = []
+                while num1 > 0:
+                    rem = num1 % 10
+                    i = 0
+                    while (i < 3):
+                        bin_digit = rem % 2
+                        res = res * 10 + bin_digit
+                        rem = rem // 2
+                        i = i + 1
+                    num1 = num1 // 10
+                while res > 0:
+                    rem = res % 10
+                    rev = rev * 10 + rem
+                    res = res // 10
+                if temp % 2 == 0:
+                    rev = rev * 10
+                while rev > 0:
+                    j = 0
+                    res2 = 0
+                    octal_digit = rev % 10000
+                    while (j < 4):
+                        rem = octal_digit % 10
+                        if rem == 1:
+                            res2 = res2 + (2 ** j)
+                        octal_digit = octal_digit // 10
+                        j = j + 1
+                    rev = rev // 10000
+                    if res2 >= 10:
+                        res2 = chr(ord('A') + res2 - 10)
+                    reversed_result.append(str(res2))
+
+                reversed_result.reverse()
+                print("The Result: ", end='')
+                for digit in reversed_result:
+                    print(digit, end="")
+            print("\n")
+
+
+            break
