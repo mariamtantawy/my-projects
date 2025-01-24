@@ -1,0 +1,386 @@
+// File: CS112_A2T3_S26_20231040_S25_20231165_20231066
+// Purpose: Rational calculator for performing basic arithmetic operations on fractions.
+// Authors: Mariam Tantawy_S25, Rawan Hesham_S25, Judy Assem_S26
+// Emails: mariamtantawy0@gmail.com, rawanhesham290@gmail.com, judyassem0@gmail.com
+// ID1: 20231165_main menu, addition, error fixing
+// ID2: 20231066_subtraction, multiplication
+// ID3: 20231040_division, error fixing
+
+#include <iostream>
+#include <string>
+#include <cctype>
+#include <algorithm>
+#include <iomanip>
+#include <numeric>
+
+using namespace std;
+
+// Function to find the greatest common divisor (GCD) of two integers
+int gcd(int a, int b)
+{
+    while (b != 0)
+    {
+        int temp = b;
+        b = a % b;
+        a = temp;
+    }
+    return a;
+}
+
+// Function to simplify a fraction by dividing both numerator and denominator by their GCD
+void simplifyFraction(int &numerator, int &denominator)
+{
+    int divisor = gcd(numerator, denominator);
+    numerator /= divisor;
+    denominator /= divisor;
+}
+
+// Function to perform addition of two fractions
+void addition(string nominator1, string nominator2, string denominator1, string denominator2)
+{
+    cout << nominator1 << "/" << denominator1 << " + " << nominator2 << "/" << denominator2 << " = ";
+    //multiplying the nominator to get common denominator to accept the addition of the nominator
+    int FracNominator = (stoi(nominator1) * stoi(denominator2) + (stoi(nominator2) * stoi(denominator1)));
+    int FracDenominator = (stoi(denominator1) * stoi(denominator2));
+    //simplify the fraction to its simplest form
+    simplifyFraction(FracNominator, FracDenominator);
+    if(FracDenominator==0){
+        cout <<"MathERROR complication"<<endl;
+    }
+    else{
+    cout<<FracNominator<<"/"<<FracDenominator<<endl;
+    }
+}
+
+// Function to perform subtraction of two fractions
+void subtraction(string nominator1, string nominator2, string denominator1, string denominator2)
+{
+    cout << nominator1 << "/" << denominator1 << " - " << nominator2 << "/" << denominator2 << " = ";
+    //multiplying the nominator to get common denominator to accept the addition of the nominator
+    //turning the numbers from strings to integers
+    int FracNominator = (stoi(nominator1) * stoi(denominator2) - (stoi(nominator2) * stoi(denominator1)));
+    int FracDenominator = (stoi(denominator1) * stoi(denominator2));
+    //simplify the fraction to its simplest form
+    simplifyFraction(FracNominator, FracDenominator);
+    if(FracDenominator==0){
+        cout <<"MathERROR complication"<<endl;
+    }
+    else{
+    cout<<FracNominator<<"/"<<FracDenominator<<endl;
+    }
+}
+
+// Function to perform multiplication of two fractions
+void multi(string nominator1, string nominator2, string denominator1, string denominator2)
+{
+    cout << nominator1 << " / " << denominator1 << " * " << nominator2 << " / " << denominator2 << " = ";
+    // Multiply the numerators and denominators separately
+    int FracNominator = stoi(nominator1) * stoi(nominator2);
+    int FracDenominator = stoi(denominator1) * stoi(denominator2);
+    // Simplify the resulting fraction
+    simplifyFraction(FracNominator, FracDenominator);
+    // Display the simplified fraction
+if(FracDenominator==0){
+        cout <<"MathERROR complication"<<endl;
+    }
+    else{
+    cout<<FracNominator<<"/"<<FracDenominator<<endl;
+    }
+
+}
+
+// Function to extract the numerator from a fraction string
+int division(string nominator1, string nominator2, string denominator1, string denominator2)
+{
+    cout << nominator1 << "/" << denominator1 << " / " << nominator2 << "/" << denominator2 << " = ";
+    int FracNominator = stoi(nominator1) * stoi(denominator2);
+    int FracDenominator = stoi(nominator2) * stoi(denominator1);
+    simplifyFraction(FracNominator, FracDenominator);
+
+  if(FracDenominator==0){
+        cout <<"\nMath ERROR complication"<<endl;
+    }
+    else{
+    cout<<FracNominator<<"/"<<FracDenominator<<endl;
+    }
+}
+
+int main()
+{
+// Declare a variable to store the user's choice
+    char choice;
+
+// Display welcome message
+    cout << setw(70) << "Welcome to Rational Number Calculator \n"
+         << setw(75) << "" << endl;
+
+// Prompt the user to open the program
+    cout << "A - Open program" << endl;
+    while(true){
+    cin >> choice;
+
+// Convert the choice to uppercase
+    choice = toupper(choice);
+
+// If the user chooses to open the program
+    if (choice == 'A')
+    {
+        // Loop to continue calculator operations until user chooses to exit
+        while (true)
+        {
+            // Declare variables to store fraction components and result
+            int FracNominator, FracDenominator;
+            cout << "Enter the equation : ";
+
+            // Array to store input fractional equation
+            string FractionalEquation[3];
+            string num1, num2;
+
+            char operation;
+            int op = 0;
+            int validity=0;
+            int v=0,z;
+            // Loop to validate input fractional equation
+            while (true)
+            {
+                 v = 0;
+                for (int i = 0; i < 3; i++)
+                {
+                    cin >> FractionalEquation[i];
+                    int y=0,x=0,z=0;
+
+                    for(int j=0; j<FractionalEquation[i].size(); j++)
+                    {
+                        if(!isdigit(FractionalEquation[i][j]))
+                        {
+                            if(FractionalEquation[i][j]=='-'||FractionalEquation[i][j]=='+')
+                            {
+
+                              z++ ;
+                            }
+                            else if (FractionalEquation[i][j]=='*'||FractionalEquation[i][j]=='/')
+                            {
+                                x++;
+                            }
+                            else{
+                                y=1;
+                            }
+                        }
+                        if(y!=0||x>1||z>1)
+                        {
+                            v=1;
+                            break;
+                        }
+
+
+                    }
+
+
+                }
+                 if (v==1)
+                    {
+                        cout<<"enter a valid fraction"<<endl;
+                        for(int k=0;k<3;k++){
+                        FractionalEquation[k]="";
+                        }
+                        break;
+                    }
+
+                if (v!=1)
+                {
+                    break;
+                }
+            }
+
+                if (v==1){
+                    continue;
+                }
+
+            // Extract numerators and denominators from first fraction
+            num1 = FractionalEquation[0];
+            operation = FractionalEquation[1][0];
+            num2 = FractionalEquation[2];
+            string nominator1, denominator1;
+
+            for (int i = 0; i < num1.size(); i++)
+            {
+                if (isdigit(num1[i]) || num1[i] == '-')
+                {
+                    nominator1 += num1[i];
+
+                }
+                else if(num1[i] == '+')
+                {
+                    continue;
+                }
+                else
+                {
+                    op = i;
+                    break;
+                }
+            }
+            for (int i = op + 1; i < num1.size(); i++)
+            {
+                if (isdigit(num1[i]) || num1[i] == '-')
+                {
+                    denominator1 += num1[i];
+
+                }
+                else if(num1[i] == '+')
+                {
+                    continue;
+                }
+            }
+            // If no denominator provided, set it to '1'
+            if (denominator1.size() == 0)
+            {
+                denominator1 += '1';
+            }
+
+            // Display first fraction
+
+
+            // Extract numerators and denominators from second fraction
+            string nominator2, denominator2;
+            for (int i = 0; i < num2.size(); i++)
+            {
+                if (isdigit(num2[i])||num2[i]=='-')
+                {
+                    nominator2 += num2[i];
+                }
+                else if (num2[i]=='+')
+                {
+                    continue;
+                }
+                else
+                {
+                    op = i;
+                    break;
+                }
+            }
+            for (int i = op + 1; i < num2.size(); i++)
+            {
+                if (isdigit(num2[i])||num2[i]=='-')
+                {
+                    denominator2 += num2[i];
+                }
+                else if (num2[i]=='+')
+                {
+                    continue;
+                }
+            }
+            // If no denominator provided, set it to '1'
+            if (denominator2.size() == 0)
+            {
+                denominator2 += '1';
+            }
+            // Display second fraction
+
+
+            long long numr1, numr2, denom1, denom2;
+
+            // Perform operation based on operator
+            switch (operation)
+            {
+            case '+':
+                addition(nominator1, nominator2, denominator1, denominator2);
+                break;
+            case '-':
+                subtraction(nominator1, nominator2, denominator1, denominator2);
+                break;
+            case '/':
+                // If operation is division, handle numerator and denominator separately
+                division(nominator1, nominator2, denominator1, denominator2);
+                break;
+            case '*':
+                // If operation is multiplication, call multi function
+                multi(nominator1, nominator2, denominator1, denominator2);
+                break;
+            default:
+                cout << "Please enter a valid operator '*' or '+' or '/' or '-' " << endl;
+            }
+
+            // Prompt user to continue or close calculator
+            char menu2;
+            cout << endl
+                 << "Select 'B' or press anything else to continue\nB - Close Calculator ";
+            cin >> menu2;
+            menu2 = toupper(menu2);
+            // If user chooses to close calculator, exit loop
+            if (menu2 == 'B')
+            {
+                cout << "Thank you for using our calculator";
+                break;
+            }
+
+
+        }
+    }
+    else{
+            continue;
+    }
+    }
+
+// End of program
+    return 0;
+}
+//algorithm in pseudocode
+//1. Define a function gcd(a, b) to find the greatest common divisor (GCD) of two integers:
+//    Function gcd(a, b):
+//        While b is not equal to 0:
+//            Temporarily store the value of b.
+//            Update b to be the remainder of a divided by b.
+//            Update a to the stored value (temp).
+//        Return a.
+//
+//2. Define a function simplifyFraction(numerator, denominator) to simplify a fraction:
+//    Function simplifyFraction(numerator, denominator):
+//        Find the GCD of the numerator and denominator using the gcd function.
+//        Divide both the numerator and denominator by their GCD.
+//
+//3. Define functions for arithmetic operations on fractions:
+//    a. Function addition(nominator1, nominator2, denominator1, denominator2):
+//        Perform addition of fractions:
+//            - Multiply the numerators to have a common denominator.
+//            - Add the resulting numerators.
+//            - Simplify the resulting fraction.
+//
+//    b. Function subtraction(nominator1, nominator2, denominator1, denominator2):
+//        Perform subtraction of fractions:
+//            - Multiply the numerators to have a common denominator.
+//            - Subtract the resulting numerators.
+//            - Simplify the resulting fraction.
+//
+//    c. Function multi(nominator1, nominator2, denominator1, denominator2):
+//        Perform multiplication of fractions:
+//            - Multiply the numerators.
+//            - Multiply the denominators.
+//            - Simplify the resulting fraction.
+//
+//    d. Function division(nominator1, nominator2, denominator1, denominator2):
+//        Perform division of fractions:
+//            - Multiply the first fraction's numerator by the second fraction's denominator.
+//            - Multiply the second fraction's numerator by the first fraction's denominator.
+//            - Simplify the resulting fraction.
+//
+//4. In the main function:
+//    Display a welcome message and prompt the user to open the program.
+//    Prompt the user to open the program by pressing 'A'.
+//    Loop until the user opens the program:
+//        Input choice.
+//        Convert choice to uppercase.
+//        If choice is 'A', continue to the next step. Otherwise, continue the loop.
+//
+//5. Once the user opens the program:
+//    Enter a loop for calculator operations until the user chooses to exit:
+//        Prompt the user to input an equation.
+//        Validate the input fractional equation:
+//            - Ensure each part is a valid fraction (numerator and denominator separated by '/').
+//            - Check for valid operators ('+', '-', '*', '/').
+//        Extract numerators and denominators from the input fractions.
+//        Perform the operation based on the operator (+, -, *, /).
+//        Display the result.
+//        Prompt the user to continue or close the calculator.
+//        If the user chooses to close the calculator, exit the loop.
+//
+//6. End of the program.
